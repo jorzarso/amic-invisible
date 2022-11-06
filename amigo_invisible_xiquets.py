@@ -27,6 +27,8 @@ for i in lista_participantes2:
     email["Subject"] = "Amic invisible xiquet"
     email.set_content("Seràs el amic invisible de: " + eleccion[indice])
     smtp = smtplib.SMTP_SSL("smtp.gmail.com")
+    # Password extra: gmail->seguridad->contraseñas de aplicaciones->Otra->Python->it must be put the password given by google
+    # change mgxpqyfjwcvlxekz for the password commented in the line 30
     smtp.login(remitente, "mgxpqyfjwcvlxekz")
     smtp.sendmail(remitente, correo[indice], email.as_string())
     smtp.quit()
