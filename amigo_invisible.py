@@ -3,12 +3,37 @@ from numpy.core.defchararray import index
 from email.message import EmailMessage
 import smtplib
 
+participant1 = 'Abuelo'
+participant2 = 'Abuela'
+participant3 = 'Vicente'
+participant4 = 'Rosa'
+participant5 = 'Carlos'
+participant6 = 'Anna'
+participant7 = 'Luis'
+participant8 = 'Raquel'
+participant9 = 'Jorge'
+participant10 = 'Belén'
+
+restricciones = {
+    participante1: [participante2],
+    participante2: [participante1],
+    participante3: [participante4],
+    participante4: [participante3],
+    participante5: [participante6],
+    participante6: [participante5],
+    participante7: [participante8],
+    participante8: [participante7],
+    participante9: [participante10],
+    participante10: [participante9]
+}
+
 lista_participantes = ['Abuelo','Abuela','Vicente','Rosa','Carlos','Anna','Luis','Raquel','Jorge','Belén']
 cantidad_participantes=len(lista_participantes)
 
     
-eleccion = np.random.choice(lista_participantes,replace=False,size=cantidad_participantes)
-
+eleccion = np.random.permutation(lista_participantes)
+while any(x == y or y in restricciones.get(x, []) for x, y in zip(lista_participantes, eleccion)):
+    eleccion = np.random.permutation(lista_participantes)
 
 eleccion = eleccion.tolist()
 
