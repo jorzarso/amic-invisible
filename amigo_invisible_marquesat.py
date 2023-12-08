@@ -1,36 +1,22 @@
 import numpy as np
-from numpy.core.defchararray import index 
 from email.message import EmailMessage
 import smtplib
 
-participant1 = 'Abuelo'
-participant2 = 'Abuela'
-participant3 = 'Vicente'
-participant4 = 'Rosa'
-participant5 = 'Carlos'
-participant6 = 'Anna'
-participant7 = 'Luis'
-participant8 = 'Raquel'
-participant9 = 'Jorge'
-participant10 = 'Belén'
+participant1 = 'Jose Maria'
+participant2 = 'Sali'
+participant3 = 'Paco'
+participant4 = 'Ade'
+participant5 = 'Jose'
+participant6 = 'Gemma'
+participant7 = 'Marta'
+participant9 = 'Belén'
+participant8 = 'Jorge'
 
-restricciones = {
-    participant1: [participant2],
-    participant2: [participant1],
-    participant3: [participant4],
-    participant4: [participant3],
-    participant5: [participant6],
-    participant6: [participant5],
-    participant7: [participant8],
-    participant8: [participant7],
-    participant9: [participant10],
-    participant10: [participant9]
-}
+restricciones = {}
 
-lista_participantes = ['Abuelo','Abuela','Vicente','Rosa','Carlos','Anna','Luis','Raquel','Jorge','Belén']
-cantidad_participantes=len(lista_participantes)
+lista_participantes = ['Jose Maria', 'Sali', 'Paco', 'Ade', 'Jose', 'Gemma', 'Marta', 'Jorge', 'Belén']
+cantidad_participantes = len(lista_participantes)
 
-    
 eleccion = np.random.permutation(lista_participantes)
 while any(x == y or y in restricciones.get(x, []) for x, y in zip(lista_participantes, eleccion)):
     eleccion = np.random.permutation(lista_participantes)
@@ -38,17 +24,17 @@ while any(x == y or y in restricciones.get(x, []) for x, y in zip(lista_particip
 eleccion = eleccion.tolist()
 
 remitente = "jorzarso1989@gmail.com"
-correo=["viczarbo@gmail.com","mariasorolla48@gmail.com","viczarzoso@gmail.com","rosamariagrso74@gmail.com","zarzosocarlos@gmail.com","annagomez617@gmail.com","luis.zarzoso@gmail.com","mazuecos.raquel@gmail.com","jorzarso1989@gmail.com","beleninsnoo@gmail.com"]
+correo = ["depradas57@gmail.com", "mariajuanrosalia@gmail.com", "pacocarrillo12200@gmail.com", "adegballester@gmail.com", "jluisalfaro1989@gmail.com", "gemmacalpemaria@gmail.com", "cgmartaa@gmail.com", "jorzarso1989@gmail.com", "beleninsnoo@gmail.com"]
 
-lista_participantes2 = ['Abuelo','Abuela','Vicente','Rosa','Carlos','Anna','Luis','Raquel','Jorge','Belén']
+lista_participantes2 = ['Jose Maria', 'Sali', 'Paco', 'Ade', 'Jose', 'Gemma', 'Marta', 'Jorge', 'Belén']
 for i in lista_participantes2:
-    indice=lista_participantes2.index(i)
+    indice = lista_participantes2.index(i)
     email = EmailMessage()
     email["From"] = remitente
     email["To"] = correo[indice]
     email["Subject"] = "Amic invisible"
 
- # Crear el contenido del correo en formato HTML con CSS
+    # Crear el contenido del correo en formato HTML con CSS y huellas de perros
     contenido_html = f"""
     <html>
     <head>
@@ -64,6 +50,7 @@ for i in lista_participantes2:
                 background-color: #ffffff;
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                position: relative;
             }}
             h1 {{
                 color: #333333;
@@ -71,6 +58,21 @@ for i in lista_participantes2:
             p {{
                 color: #555555;
             }}
+            .dog-paw {{
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                position: absolute;
+            }}
+            .paw-1 {{
+                top: 20px;
+                left: 20px;
+            }}
+            .paw-2 {{
+                top: 60px;
+                left: 50px;
+            }}
+            /* Agrega más clases de huellas según sea necesario */
         </style>
     </head>
     <body>
@@ -79,6 +81,9 @@ for i in lista_participantes2:
             <p>Hola {i},</p>
             <p>Vas a ser l'amic invisible de: {eleccion[indice]}</p>
             <p>¡Contesta al correu per a confirmar que l'has rebut!</p>
+            <img class="dog-paw paw-1" src="huella-perro1.png" alt="Dog Paw">
+            <img class="dog-paw paw-2" src="perro.png" alt="Dog Paw">
+            <!-- Agrega más imágenes de huellas de perros según sea necesario -->
         </div>
     </body>
     </html>
@@ -92,7 +97,3 @@ for i in lista_participantes2:
     smtp.login(remitente, "knbn iuol fmrk ocbs")
     smtp.sendmail(remitente, correo[indice], email.as_string())
     smtp.quit()
-
-
-
-
